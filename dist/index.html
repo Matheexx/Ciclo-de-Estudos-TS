@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="./js/index.js" defer></script>
+    <title>Ciclo de Estudos</title>
+</head>
+<body>
+    <header>
+        <h1>Ciclo de Estudos</h1>
+    </header>
+    <main>
+        <div class="machine">
+            <div class="form">
+                <div class="contentsAndDifficult">
+                    <div class="inputsContentsAndDifficult">
+                        <div class="divContents">
+                            <label for="inputContent">Conteúdo a ser adicionado:</label>
+                            <input type="text" name="inputContent" id="inputContent">
+                        </div>
+                        <div class="divDifficult">
+                            <div class="divInputDifficult">
+                                <label for="selectDifficult">Selecione a sua facilidade no conteúdo acima:</label>
+                                <select name="selectDifficult" id="selectDifficult">
+                                    <option selected disabled style="color: black;">Selecione</option>
+                                    <option class="optionDifficult" style="color: rgb(64, 64, 255);">Ótimo</option>
+                                    <option class="optionDifficult" style="color: rgb(64, 255, 64);">Bom</option>
+                                    <option class="optionDifficult" style="color: rgb(218, 218, 18);">Razoável</option>
+                                    <option class="optionDifficult" style="color: rgb(246, 154, 7);">Ruim</option>
+                                    <option class="optionDifficult" style="color: rgb(223, 44, 44);">Péssimo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="contentsButtons">
+                            <input type="button" value="Adicionar à lista" class="buttons" onclick="addContent()">
+                            <input type="button" value="Remover último da lista" class="buttons" onclick="removeContent()">
+                            <input type="button" value="Limpar lista" class="buttons" onclick="clearContents()">
+                        </div>
+                    </div>
+                    <div class="showContents">
+                        <label for="selectContents">Lista dos conteúdos adicionados:</label>
+                        <select name="selectContents" id="selectContents" size="8">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="Hours">
+                    <div class="divInputHours">
+                        <label for="inputHours">Quantidade de horas diárias a serem estudadas (1 a 12):</label>
+                        <input type="number" name="inputHours" id="inputHours" min="1" max="12">
+                    </div>
+                    <input type="button" value="Enviar" id="buttonSubmit" class="buttons" onclick="fSubmit()">
+                </div>
+            </div>
+            <div class="result">
+                <h2>Resultado:</h2>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p><strong>Este é um sistema que <em>facilita</em> a criação de ciclo de estudos. Portanto, é necessário ver o <a href="https://youtu.be/AjU0UmGHm2Q" target="_blank"><em>vídeo da qual utilizei o método</em></a>, do canal <a href="https://www.youtube.com/@MatematicaemEvidencia" target="_blank"><em>Matemática em Evidência</em></a>.</strong></p>
+        <p>&copy;Stars</p>
+    </footer>
+</body>
+</html>
