@@ -18,11 +18,9 @@ function addContent():void {
     const difficult5:HTMLOptionElement = optionsDifficult[4];
 
     if (verifyInputContent(inputContent) && verifyContentAddedBefore(inputContent) && verifySelectOption(difficult1, difficult2, difficult3, difficult4, difficult5)) {
-
         result.innerHTML = "<h2>Resultado:</h2>";
         const content:string = inputContent.value;
         contents.push(content);
-
 
         const difficultNumber:number = returnSelectOption(difficult1, difficult2, difficult3, difficult4, difficult5)[0];
         difficultsNumber.push(difficultNumber);
@@ -31,15 +29,11 @@ function addContent():void {
 
         const color:string = colorsDifficult(difficultString);
 
-
         const optionContent:HTMLOptionElement = window.document.createElement("option");
-
         optionContent.text = `${content} - ${difficultString}`;
-
         optionContent.classList.add(color);
 
         selectContents.appendChild(optionContent);
-
     } else {
         window.alert("Complete com as informações corretamente");
     }
