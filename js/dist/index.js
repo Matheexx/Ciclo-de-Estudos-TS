@@ -53,7 +53,7 @@ function fSubmit() {
             const valueTotalDifficultsNumber = sumDifficultsNumber();
             const hoursPerDay = Number(inputHours.value);
             const hoursPerWeek = hoursPerDay * 7;
-            const hoursPerCycle = Math.round(hoursPerWeek / valueTotalDifficultsNumber);
+            const hoursPerCycle = hoursPerWeek / valueTotalDifficultsNumber;
             const resultList = generateHtmlResult(contents, hoursPerCycle, difficultsNumber, difficultsString);
             result.appendChild(resultList);
         }
@@ -86,7 +86,7 @@ function generateHtmlResult(contents, hoursPerCycle, difficultsNumber, difficult
     const resultList = document.createElement('ul');
     let resultListContent = '';
     for (let i = 0; i <= contents.length - 1; i++) {
-        let hoursPerContent = hoursPerCycle * difficultsNumber[i];
+        let hoursPerContent = Math.round(hoursPerCycle * difficultsNumber[i]);
         resultListContent += `<li><span class="${colorsDifficult(difficultsString[i])}">${contents[i]}</span> - ${hoursPerContent} horas por ciclo.</li>`;
     }
     resultList.innerHTML = resultListContent;
