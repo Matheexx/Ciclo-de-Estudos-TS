@@ -3,13 +3,13 @@ let contents:string[] = [];
 let difficultsNumber:number[] = [];
 let difficultsString:string[] = [];
 
-const selectContents:HTMLSelectElement = window.document.getElementById("selectContents") as HTMLSelectElement;
+const listContents:HTMLUListElement = document.getElementById("listContents") as HTMLUListElement;
 
-const result:HTMLDivElement = window.document.getElementsByClassName("result")[0] as HTMLDivElement;
+const result:HTMLDivElement = document.getElementsByClassName("result")[0] as HTMLDivElement;
 
 function addContent():void {
-    const inputContent:HTMLInputElement = window.document.getElementById('inputContent') as HTMLInputElement;
-    const optionsDifficult:HTMLOptionsCollection = window.document.getElementsByClassName("optionDifficult") as HTMLOptionsCollection;
+    const inputContent:HTMLInputElement = document.getElementById('inputContent') as HTMLInputElement;
+    const optionsDifficult:HTMLOptionsCollection = document.getElementsByClassName("optionDifficult") as HTMLOptionsCollection;
 
     const difficult1:HTMLOptionElement = optionsDifficult[0];
     const difficult2:HTMLOptionElement = optionsDifficult[1];
@@ -29,13 +29,13 @@ function addContent():void {
 
         const color:string = colorsDifficult(difficultString);
 
-        const optionContent:HTMLOptionElement = window.document.createElement("option");
-        optionContent.text = `${content} - ${difficultString}`;
-        optionContent.classList.add(color);
+        const itemListContent:HTMLLIElement = document.createElement("li");
+        itemListContent.innerHTML = `${content} - ${difficultString}`;
+        itemListContent.classList.add(color);
 
-        selectContents.appendChild(optionContent);
+        listContents.appendChild(itemListContent);
     } else {
-        window.alert("Complete com as informações corretamente");
+        alert("Complete com as informações corretamente");
     }
     inputContent.value = "";
 }
@@ -45,7 +45,7 @@ function removeContent():void {
     contents.pop();
     difficultsNumber.pop();
     difficultsString.pop();
-    selectContents.remove(contents.length);
+    listContents.removeChild(listContents.children[listContents.children.length - 1]);
 }
 
 function clearContents():void {
@@ -53,33 +53,29 @@ function clearContents():void {
     contents = [];
     difficultsNumber = [];
     difficultsString = [];
-    selectContents.innerHTML = "";
+    listContents.innerHTML = "";
 }
 
 function fSubmit():void {
     result.innerHTML = "<h2>Resultado:</h2>";
-    const inputHours:HTMLInputElement = window.document.getElementById("inputHours") as HTMLInputElement;
+    const inputHours:HTMLInputElement = document.getElementById("inputHours") as HTMLInputElement;
     if (verifyInputHours(inputHours)) {
         if (verifyContents()) {
             const valueTotalDifficultsNumber:number = sumDifficultsNumber();
-            console.log(`Soma das dificuldades: ${valueTotalDifficultsNumber}`);
 
             const hoursPerDay:number = Number(inputHours.value);
-            console.log(`Horas por dia: ${hoursPerDay}`);
             const hoursPerWeek:number = hoursPerDay * 7;
-            console.log(`Horas por semana: ${hoursPerWeek}`);
 
             const hoursPerCycle:number = Math.round(hoursPerWeek / valueTotalDifficultsNumber);
-            console.log(`Horas por ciclo: ${hoursPerCycle}`);
 
             const resultList:HTMLUListElement = generateHtmlResult(contents, hoursPerCycle, difficultsNumber, difficultsString);
 
             result.appendChild(resultList);
         } else {
-            window.alert("Não foi adicionada matérias à lista");
+            alert("Não foi adicionada matérias à lista");
         }
     } else {
-        window.alert("Quantidade de horas diárias inválida!");
+        alert("Quantidade de horas diárias inválida!");
         inputHours.value = "";
     }
 }
@@ -110,7 +106,6 @@ function generateHtmlResult(contents:string[], hoursPerCycle: number, difficults
     let resultListContent:string = '';
     for (let i = 0; i <= contents.length - 1; i++) {
         let hoursPerContent = hoursPerCycle * difficultsNumber[i];
-        console.log(`Horas do conteúdo ${contents[i]}: ${hoursPerContent}`);
         resultListContent += `<li><span class="${colorsDifficult(difficultsString[i])}">${contents[i]}</span> - ${hoursPerContent} horas por ciclo.</li>`;
     }
 
@@ -120,7 +115,7 @@ function generateHtmlResult(contents:string[], hoursPerCycle: number, difficults
 
 function verifyContentAddedBefore(inputContent:HTMLInputElement):boolean {
     if (contents.indexOf(inputContent.value) !== -1) {
-        window.alert("Este conteúdo já está na lista");
+        alert("Este conteúdo já está na lista");
         return false;
     }
     return true;

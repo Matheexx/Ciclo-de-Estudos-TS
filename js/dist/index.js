@@ -2,11 +2,11 @@
 let contents = [];
 let difficultsNumber = [];
 let difficultsString = [];
-const selectContents = window.document.getElementById("selectContents");
-const result = window.document.getElementsByClassName("result")[0];
+const listContents = document.getElementById("listContents");
+const result = document.getElementsByClassName("result")[0];
 function addContent() {
-    const inputContent = window.document.getElementById('inputContent');
-    const optionsDifficult = window.document.getElementsByClassName("optionDifficult");
+    const inputContent = document.getElementById('inputContent');
+    const optionsDifficult = document.getElementsByClassName("optionDifficult");
     const difficult1 = optionsDifficult[0];
     const difficult2 = optionsDifficult[1];
     const difficult3 = optionsDifficult[2];
@@ -21,13 +21,13 @@ function addContent() {
         const difficultString = returnSelectOption(difficult1, difficult2, difficult3, difficult4, difficult5)[1];
         difficultsString.push(difficultString);
         const color = colorsDifficult(difficultString);
-        const optionContent = window.document.createElement("option");
-        optionContent.text = `${content} - ${difficultString}`;
-        optionContent.classList.add(color);
-        selectContents.appendChild(optionContent);
+        const itemListContent = document.createElement("li");
+        itemListContent.innerHTML = `${content} - ${difficultString}`;
+        itemListContent.classList.add(color);
+        listContents.appendChild(itemListContent);
     }
     else {
-        window.alert("Complete com as informações corretamente");
+        alert("Complete com as informações corretamente");
     }
     inputContent.value = "";
 }
@@ -36,37 +36,33 @@ function removeContent() {
     contents.pop();
     difficultsNumber.pop();
     difficultsString.pop();
-    selectContents.remove(contents.length);
+    listContents.removeChild(listContents.children[listContents.children.length - 1]);
 }
 function clearContents() {
     result.innerHTML = "<h2>Resultado:</h2>";
     contents = [];
     difficultsNumber = [];
     difficultsString = [];
-    selectContents.innerHTML = "";
+    listContents.innerHTML = "";
 }
 function fSubmit() {
     result.innerHTML = "<h2>Resultado:</h2>";
-    const inputHours = window.document.getElementById("inputHours");
+    const inputHours = document.getElementById("inputHours");
     if (verifyInputHours(inputHours)) {
         if (verifyContents()) {
             const valueTotalDifficultsNumber = sumDifficultsNumber();
-            console.log(`Soma das dificuldades: ${valueTotalDifficultsNumber}`);
             const hoursPerDay = Number(inputHours.value);
-            console.log(`Horas por dia: ${hoursPerDay}`);
             const hoursPerWeek = hoursPerDay * 7;
-            console.log(`Horas por semana: ${hoursPerWeek}`);
             const hoursPerCycle = Math.round(hoursPerWeek / valueTotalDifficultsNumber);
-            console.log(`Horas por ciclo: ${hoursPerCycle}`);
             const resultList = generateHtmlResult(contents, hoursPerCycle, difficultsNumber, difficultsString);
             result.appendChild(resultList);
         }
         else {
-            window.alert("Não foi adicionada matérias à lista");
+            alert("Não foi adicionada matérias à lista");
         }
     }
     else {
-        window.alert("Quantidade de horas diárias inválida!");
+        alert("Quantidade de horas diárias inválida!");
         inputHours.value = "";
     }
 }
@@ -91,7 +87,6 @@ function generateHtmlResult(contents, hoursPerCycle, difficultsNumber, difficult
     let resultListContent = '';
     for (let i = 0; i <= contents.length - 1; i++) {
         let hoursPerContent = hoursPerCycle * difficultsNumber[i];
-        console.log(`Horas do conteúdo ${contents[i]}: ${hoursPerContent}`);
         resultListContent += `<li><span class="${colorsDifficult(difficultsString[i])}">${contents[i]}</span> - ${hoursPerContent} horas por ciclo.</li>`;
     }
     resultList.innerHTML = resultListContent;
@@ -99,7 +94,7 @@ function generateHtmlResult(contents, hoursPerCycle, difficultsNumber, difficult
 }
 function verifyContentAddedBefore(inputContent) {
     if (contents.indexOf(inputContent.value) !== -1) {
-        window.alert("Este conteúdo já está na lista");
+        alert("Este conteúdo já está na lista");
         return false;
     }
     return true;

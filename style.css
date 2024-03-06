@@ -150,14 +150,23 @@ main {
     margin-bottom: 8px;
 }
 
-#selectContents {
+#listContents {
     width: 100%;
     max-width: 310px;
-    height: 100px;
+    height: 120px;
     border-radius: 5px;
-}
-#selectContents option {
     font-size: 16px;
+    background-color: white;
+    padding: 5px;
+    overflow-y: scroll;
+    list-style-type: none;
+}
+#listContents li {
+    border-bottom: 1px solid #cacaca;
+    padding: 1px;
+}
+#listContents li:last-child {
+    border: 0;
 }
 
 .Hours {
