@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/js/dist/index.js" defer></script>
+    <title>Ciclo de Estudos</title>
+</head>
+<body>
+    <header>
+        <h1>Ciclo de Estudos</h1>
+    </header>
+    <main>
+        <div class="machine">
+            <div class="form">
+                <div class="contentsAndDifficult">
+                    <div class="inputsContentsAndDifficult">
+                        <div class="divContents">
+                            <label for="inputContent">Conteúdo a ser adicionado:</label>
+                            <input type="text" name="inputContent" id="inputContent" placeholder="Digite o conteúdo">
+                        </div>
+                        <div class="divDifficult">
+                            <div class="divInputDifficult">
+                                <label for="selectDifficult">Selecione a sua facilidade no conteúdo acima:</label>
+                                <select name="selectDifficult" id="selectDifficult">
+                                    <option selected disabled style="color: black;">Selecione a dificuldade</option>
+                                    <option class="optionDifficult blue">Ótimo</option>
+                                    <option class="optionDifficult green">Bom</option>
+                                    <option class="optionDifficult yellow">Razoável</option>
+                                    <option class="optionDifficult orange">Ruim</option>
+                                    <option class="optionDifficult red">Péssimo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="contentsButtons">
+                            <input type="button" value="Adicionar à lista" class="buttons" onclick="addContent()">
+                            <input type="button" value="Remover último da lista" class="buttons" onclick="removeContent()">
+                            <input type="button" value="Limpar lista" class="buttons" onclick="clearContents()">
+                        </div>
+                    </div>
+                    <div class="showContents">
+                        <label for="selectContents">Lista dos conteúdos adicionados:</label>
+                        <select name="selectContents" id="selectContents" size="8">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="Hours">
+                    <div class="divInputHours">
+                        <label for="inputHours">Quantidade de horas diárias a serem estudadas (1 a 12):</label>
+                        <input type="number" name="inputHours" id="inputHours" min="1" max="12">
+                    </div>
+                    <input type="button" value="Enviar" id="buttonSubmit" class="buttons" onclick="fSubmit()">
+                </div>
+            </div>
+            <div class="result">
+                <h2>Resultado:</h2>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p><strong>Este é um sistema que <em>facilita</em> a criação de ciclo de estudos. Portanto, é necessário ver o <a href="https://youtu.be/AjU0UmGHm2Q" target="_blank"><em>vídeo da qual utilizei o método</em></a>, do canal <a href="https://www.youtube.com/@MatematicaemEvidencia" target="_blank"><em>Matemática em Evidência</em></a>.</strong></p>
+            <p>&copy; MatheusRamosDeLima - 2024</p>
+        </div>
+    </footer>
+</body>
+</html>
