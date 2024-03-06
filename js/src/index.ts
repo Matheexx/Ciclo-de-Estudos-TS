@@ -62,11 +62,15 @@ function fSubmit():void {
     if (verifyInputHours(inputHours)) {
         if (verifyContents()) {
             const valueTotalDifficultsNumber:number = sumDifficultsNumber();
+            console.log(`Soma das dificuldades: ${valueTotalDifficultsNumber}`);
 
             const hoursPerDay:number = Number(inputHours.value);
+            console.log(`Horas por dia: ${hoursPerDay}`);
             const hoursPerWeek:number = hoursPerDay * 7;
+            console.log(`Horas por semana: ${hoursPerWeek}`);
 
-            const hoursPerCycle:number = hoursPerWeek / valueTotalDifficultsNumber;
+            const hoursPerCycle:number = Math.round(hoursPerWeek / valueTotalDifficultsNumber);
+            console.log(`Horas por ciclo: ${hoursPerCycle}`);
 
             const resultList:HTMLUListElement = generateHtmlResult(contents, hoursPerCycle, difficultsNumber, difficultsString);
 
@@ -106,7 +110,8 @@ function generateHtmlResult(contents:string[], hoursPerCycle: number, difficults
     let resultListContent:string = '';
     for (let i = 0; i <= contents.length - 1; i++) {
         let hoursPerContent = hoursPerCycle * difficultsNumber[i];
-        resultListContent += `<li><span class="${colorsDifficult(difficultsString[i])}">${contents[i]}</span> - ${hoursPerContent.toFixed().replace(/\.?0+$/, "")} horas por ciclo.</li>`;
+        console.log(`Horas do conteúdo ${contents[i]}: ${hoursPerContent}`);
+        resultListContent += `<li><span class="${colorsDifficult(difficultsString[i])}">${contents[i]}</span> - ${hoursPerContent} horas por ciclo.</li>`;
     }
 
     resultList.innerHTML = resultListContent;
